@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mobile_bottom_navigation"
+    app:startDestination="@id/nav_movie">
+
+
+    <fragment
+        android:id="@+id/nav_movie"
+        android:name="com.satya.subm.submission.ui.movie.MovieFragment"
+        android:label="Movie"
+        tools:layout="@layout/fragment_movie" >
+        <action
+            android:id="@+id/action_nav_movie_to_nav_details"
+            app:destination="@id/nav_details" />
+    </fragment>
+    <fragment
+        android:id="@+id/nav_favorite"
+        android:name="com.satya.subm.submission.ui.favorite.FavoriteFragment"
+        android:label="Favorite"
+        tools:layout="@layout/fragment_favorite" />
+    <fragment
+        android:id="@+id/nav_account"
+        android:name="com.satya.subm.submission.ui.account.AccountFragment"
+        android:label="Account"
+        tools:layout="@layout/fragment_account" />
+    <fragment
+        android:id="@+id/nav_details"
+        android:name="com.satya.subm.submission.ui.details.DetailsFragment"
+        android:label="Detail Movies"
+        tools:layout="@layout/fragment_details" >
+        <argument
+            android:name="movie"
+            app:argType="com.satya.subm.submission.data.remote.Movie" />
+        <argument
+            android:name="duration"
+            app:argType="string" />
+    </fragment>
+</navigation>
