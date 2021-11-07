@@ -49,17 +49,7 @@ class MainActivity : AppCompatActivity() {
         drawer_layout.addDrawerListener(toogle)
         toogle.syncState()
 
-        /*val binding  = ActivityMainBinding.inflate(layoutInflater)
 
-        setContentView(binding.root)
-
-        val navHostFragment = supportFragmentManager.findFragmentById(R.id.nav_view)*/
-
-        /*drawer_layout = findViewById(R.id.drawer_layout)
-        toolbar = findViewById(R.id.toolbar)
-        nav_view = findViewById(R.id.nav_view)
-
-        setSupportActionBar(findViewById(R.id.toolbar))*/
 
 
     }
