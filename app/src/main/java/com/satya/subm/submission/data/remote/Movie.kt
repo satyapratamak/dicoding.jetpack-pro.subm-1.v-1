@@ -19,6 +19,7 @@ data class Movie(
     val video: String?,
     val vote_average: String?,
     val vote_count: String?,
+    val genre_ids : Array<String>?,
 
     ) : Parcelable{
     val baseUrl: String get() = "https://image.tmdb.org/t/p/w200"

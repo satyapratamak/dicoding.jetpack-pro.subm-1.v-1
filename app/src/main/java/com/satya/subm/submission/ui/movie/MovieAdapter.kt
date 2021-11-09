@@ -78,13 +78,6 @@ class MovieAdapter(private val listener : OnItemClickListener) : PagingDataAdapt
         }
     }
 
-//    fun createMovieReleaseDate(apiReleaseDate : String?):String{
-//
-//        val list = apiReleaseDate.split("-")
-//        var releaseDate : String = list[0]
-//        return releaseDate
-//    }
-
     fun rand(start: Int, end: Int): Int {
         require(start <= end) { "Illegal Argument" }
         return (Math.random() * (end - start + 1)).toInt() + start

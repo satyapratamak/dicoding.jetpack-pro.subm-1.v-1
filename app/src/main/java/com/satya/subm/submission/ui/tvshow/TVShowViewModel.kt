@@ -1,21 +1,21 @@
-package com.satya.subm.submission.ui.movie
+package com.satya.subm.submission.ui.tvshow
 
 import androidx.hilt.Assisted
-import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.switchMap
 import androidx.lifecycle.viewModelScope
 import androidx.paging.cachedIn
-import com.satya.subm.submission.data.remote.MovieRepository
+import com.satya.subm.submission.data.remote.tvshow.TVShowRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
+
 @HiltViewModel
-class MovieViewModel @Inject constructor(
-    private val repository: MovieRepository,
+class TVShowViewModel@Inject constructor(
+    private val repository: TVShowRepository,
     @Assisted state: SavedStateHandle
-) : ViewModel() {
+) : ViewModel()  {
 
     companion object {
         private const val CURRENT_QUERY = "current_query"
@@ -24,16 +24,16 @@ class MovieViewModel @Inject constructor(
 
     private val currentQuery = state.getLiveData(CURRENT_QUERY, EMPTY_QUERY)
 
-
-    val movies = currentQuery.switchMap { query ->
+    val tvshows = currentQuery.switchMap { query ->
         if (!query.isEmpty()) {
-            repository.searchMovies(query)
+            repository.searchPopularTVShow(query)
         } else {
-            repository.getNowPlayingMovies().cachedIn(viewModelScope)
+            repository.getPopularTVShow().cachedIn(viewModelScope)
         }
     }
 
     fun searchMovies(query : String){
         currentQuery.value = query
     }
+
 }
