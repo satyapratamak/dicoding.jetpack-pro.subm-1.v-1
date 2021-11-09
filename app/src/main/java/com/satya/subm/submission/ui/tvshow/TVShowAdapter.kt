@@ -16,9 +16,13 @@ import com.satya.subm.submission.data.remote.tvshow.TVShow
 import com.satya.subm.submission.databinding.ItemMovieBinding
 import com.satya.subm.submission.databinding.ItemTvshowBinding
 import com.satya.subm.submission.ui.movie.MovieAdapter
+import org.json.JSONArray
+import org.json.JSONTokener
 import java.time.LocalDate
 
-class TVShowAdapter (private val listener : OnItemClickListener) : PagingDataAdapter<TVShow, TVShowAdapter.TVShowViewHolder>(COMPARATOR){
+class TVShowAdapter(private val listener: OnItemClickListener) :
+    PagingDataAdapter<TVShow, TVShowAdapter.TVShowViewHolder>(COMPARATOR) {
+
 
     inner class TVShowViewHolder(private val binding: ItemTvshowBinding) :
         RecyclerView.ViewHolder(binding.root) {
@@ -49,15 +53,28 @@ class TVShowAdapter (private val listener : OnItemClickListener) : PagingDataAda
                     .transition(DrawableTransitionOptions.withCrossFade())
                     .error(R.drawable.ic_error)
                     .into(ivTvshowPoster)
-//                tvMovieTitle.text = movie.original_title
-//                tvOverview.text = movie.overview
-//                if (movie.original_language == "en"){
-//                    tvLanguage.text = "Languange : English"
-//                }
-//
-//                var date = LocalDate.parse(movie.release_date)
-//                tvReleaseDate.text = " Release Date : ${date.dayOfMonth.toString()} ${date.month.toString()} ${date.year.toString()} "
-//                if (movie.adult == "false"){
+                tvTvshowName.text = tvshow.name
+                tvOverview.text = tvshow.overview
+
+                if (tvshow.original_language == "en") {
+                    tvLanguage.text = "Languange : English"
+                }else{
+                    tvLanguage.text = "Languange : Non English"
+                }
+
+                var date = LocalDate.parse(tvshow.first_air_date)
+                tvFirstAirDate.text = " Release Date : ${date.dayOfMonth.toString()} ${date.month.toString()} ${date.year.toString()} "
+
+                tvOriginCountry.text = "Original Country : ${getOriginCountry(tvshow.origin_country)}"
+                tvPopularity.text = "Popularity : ${tvshow.popularity}"
+                tvVoteAverage.text = "Vote Average : ${tvshow.vote_average}"
+                tvVoteCount.text = "Vote Counte : ${tvshow.vote_count}"
+
+
+
+
+
+            //                if (movie.adult == "false"){
 //                    tvRatingUmur.text = "Semua Umur"
 //                    tvRatingUmur.setTextColor(Color.parseColor("#0B6623"))
 //                }else{
@@ -74,10 +91,31 @@ class TVShowAdapter (private val listener : OnItemClickListener) : PagingDataAda
 //                tvVoteCount.text = "Vote Count : ${movie.vote_count}"
 
 
-
-
             }
         }
+    }
+
+    fun getOriginCountry( arrOriginCountry : Array<String>? ) : String {
+        var country : String = ""
+
+        if (!arrOriginCountry.isNullOrEmpty() ){
+
+            if (arrOriginCountry[0] == "US"){
+                country = "USA"
+            }else if (arrOriginCountry[0] == "KR"){
+                country = "Korea"
+            }else if (arrOriginCountry[0] == "AR"){
+                country = "Argentina"
+            }else if (arrOriginCountry[0] == "DE"){
+                country = "Deutch"
+            }else if (arrOriginCountry[0] == "IN"){
+                country = "India"
+            }else{
+                country = arrOriginCountry[0]
+            }
+        }
+
+        return country
     }
 
 //    fun rand(start: Int, end: Int): Int {
@@ -110,7 +148,7 @@ class TVShowAdapter (private val listener : OnItemClickListener) : PagingDataAda
         }
     }
 
-    interface OnItemClickListener{
-        fun onItemClick(movie : Movie, duration : String)
+    interface OnItemClickListener {
+        fun onItemClick(movie: Movie, duration: String)
     }
 }
