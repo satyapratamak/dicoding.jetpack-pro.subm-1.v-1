@@ -68,7 +68,7 @@ class TVShowAdapter(private val listener: OnItemClickListener) :
                 tvOriginCountry.text = "Original Country : ${getOriginCountry(tvshow.origin_country)}"
                 tvPopularity.text = "Popularity : ${tvshow.popularity}"
                 tvVoteAverage.text = "Vote Average : ${tvshow.vote_average}"
-                tvVoteCount.text = "Vote Counte : ${tvshow.vote_count}"
+                tvVoteCount.text = "Vote Count : ${tvshow.vote_count}"
 
 
 
